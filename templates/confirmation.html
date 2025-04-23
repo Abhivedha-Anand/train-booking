@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirm Booking</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='confirmation.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Confirm Your Booking</h2>
+
+    <form method="POST" action="/confirm">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th><th>Age</th><th>Gender</th><th>Berth</th><th>Nationality</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in passengers %}
+          <tr>
+            <td>
+              {{ p.name }}
+              <input type="hidden" name="name-{{ loop.index0 }}" value="{{ p.name }}">
+            </td>
+            <td>
+              {{ p.age }}
+              <input type="hidden" name="age-{{ loop.index0 }}" value="{{ p.age }}">
+            </td>
+            <td>
+              {{ p.gender }}
+              <input type="hidden" name="gender-{{ loop.index0 }}" value="{{ p.gender }}">
+            </td>
+            <td>
+              {{ p.berth }}
+              <input type="hidden" name="berth-{{ loop.index0 }}" value="{{ p.berth }}">
+            </td>
+            <td>
+              {{ p.nationality }}
+              <input type="hidden" name="nationality-{{ loop.index0 }}" value="{{ p.nationality }}">
+            </td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+
+      <button type="submit" class="button">Confirm Booking</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IRCTC Passenger Details</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f4f7;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    .passenger {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+      align-items: end;
+    }
+
+    .passenger label {
+      font-weight: bold;
+    }
+
+    .passenger input, .passenger select {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 100%;
+    }
+
+    .actions {
+      text-align: right;
+    }
+
+    button {
+      background-color: black;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    button:hover {
+      background-color: #677681;
+    }
+
+    .remove-btn {
+      background-color: black;
+    }
+
+    .remove-btn:hover {
+      background-color: #677681;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Passenger Details</h2>
+    <form id="passenger-form">
+      <div id="passenger-list">
+        <!-- Passenger fields will be inserted here -->
+      </div>
+      <div class="actions">
+        <button type="button" onclick="addPassenger()">Add Passenger</button>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    let passengerCount = 0;
+
+    function addPassenger() {
+      passengerCount++;
+      const list = document.getElementById("passenger-list");
+
+      const div = document.createElement("div");
+      div.className = "passenger";
+      div.id = `passenger-${passengerCount}`;
+
+      div.innerHTML = `
+        <div>
+          <label for="name-${passengerCount}">Name</label>
+          <input type="text" name="name-${passengerCount}" required>
+        </div>
+        <div>
+          <label for="age-${passengerCount}">Age</label>
+          <input type="number" name="age-${passengerCount}" required>
+        </div>
+        <div>
+          <label for="gender-${passengerCount}">Gender</label>
+          <select name="gender-${passengerCount}">
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="berth-${passengerCount}">Berth Preference</label>
+          <select name="berth-${passengerCount}">
+            <option>None</option>
+            <option>Lower</option>
+            <option>Middle</option>
+            <option>Upper</option>
+            <option>Side Lower</option>
+            <option>Side Upper</option>
+          </select>
+        </div>
+        <div>
+          <label for="nationality-${passengerCount}">Nationality</label>
+          <input type="text" name="nationality-${passengerCount}" value="Indian" required>
+        </div>
+        <div>
+          <button type="button" class="remove-btn" onclick="removePassenger(${passengerCount})">Remove</button>
+        </div>
+      `;
+
+      list.appendChild(div);
+    }
+
+    function removePassenger(id) {
+      const div = document.getElementById(`passenger-${id}`);
+      if (div) div.remove();
+    }
+
+    document.getElementById("passenger-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Passenger details submitted!");
+      // Optionally send form data to backend here
+    });
+
+    // Add one default passenger
+    addPassenger();
+  </script>
+</body>
+</html>

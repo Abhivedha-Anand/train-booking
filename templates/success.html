@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Success</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='confirmation.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Booking Confirmed</h2>
+    <p>Your PNR: <strong>{{ pnr }}</strong></p>
+    <table>
+    <thead>
+        <tr>
+        <th>Name</th><th>Age</th><th>Gender</th><th>Allotted Berth</th><th>Seat No</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in passengers %}
+        <tr>
+        <td>{{ p.name }}</td>
+        <td>{{ p.age }}</td>
+        <td>{{ p.gender }}</td>
+        <td>{{ p.berth_allotted }}</td>
+        <td>{{ p.seat_no }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+
+    <button type="submit" class="button">Go to Home</button>
+    
+
+  </div>
+</body>
+</html>
